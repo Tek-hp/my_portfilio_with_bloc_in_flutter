@@ -19,7 +19,6 @@ class _HomeBodyState extends State<HomeBody> {
   final ScrollController _controller = ScrollController();
   final introKey = GlobalKey();
   final aboutKey = GlobalKey();
-  final projectKey = GlobalKey();
   final contactKey = GlobalKey();
 
   @override
@@ -37,13 +36,11 @@ class _HomeBodyState extends State<HomeBody> {
     _controller.addListener(() {
       double controllerHeight = _controller.offset;
       if (_controller.position.extentAfter == 0.0) {
-        context.read<HomeBloc>().add(ChangeAppBarHeadersColorByColor(3));
+        context.read<HomeBloc>().add(ChangeAppBarHeadersColorByColor(2));
       } else if (controllerHeight < introHeight) {
         context.read<HomeBloc>().add(ChangeAppBarHeadersColorByColor(0));
       } else if (controllerHeight < (introHeight + aboutHeight)) {
         context.read<HomeBloc>().add(ChangeAppBarHeadersColorByColor(1));
-      } else {
-        context.read<HomeBloc>().add(ChangeAppBarHeadersColorByColor(3));
       }
     });
   }
@@ -74,12 +71,6 @@ class _HomeBodyState extends State<HomeBody> {
             );
           }
           if (state.index == 2) {
-            Scrollable.ensureVisible(
-              projectKey.currentContext!,
-              duration: duration,
-            );
-          }
-          if (state.index == 3) {
             Scrollable.ensureVisible(
               contactKey.currentContext!,
               duration: duration,
